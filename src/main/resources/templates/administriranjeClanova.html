@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head th:insert="navigacija.html :: headerfiles">
+    <meta charset="UTF-8">
+    <title>Administrator</title>
+</head>
+<body style="background-color: LightGrey;">
+<header th:insert="navigacija.html :: nav"></header>
+<div class="container">
+    <form th:action="@{/administriranjeClanova}" th:object="${korisnik}" method="post" th:align="center">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>Ime</th>
+                <th>Prezime</th>
+                <th>Email</th>
+                <th>Izmene</th>
+                <th>Brisanje</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="korisnik : ${korisnik}" th:if="${(korisnik.tipKorisnika == 'KORISNIK')}">
+                <td th:text="${korisnik.ime}"></td>
+                <td th:text="${korisnik.prezime}"></td>
+                <td th:text="${korisnik.email}"></td>
+                <td>
+                    <a class="btn btn-primary" th:href="@{/korisnici/update/{korisnik_id}(korisnik_id=${korisnik.korisnikId})}">Izmeni</a>
+                </td>
+                <td>
+                    <a class="btn btn-danger"  th:href="@{/korisnici/delete/{korisnik_id}(korisnik_id=${korisnik.korisnikId})}">Obriši</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
+</body>
+</html>

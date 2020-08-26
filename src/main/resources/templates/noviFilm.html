@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head th:insert="navigacija.html :: headerfiles">
+    <meta charset="UTF-8">
+    <title>Dodavanje filmova</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<div style="margin: 0px; padding: 0px;">
+    <body style="font-size: 120%; background-color: #E5F0FF; font-family: 'Open Sans', sans-serif;" >
+    <header th:insert="navigacija.html :: nav"></header>
+    <div class="header" style="width: 30%; margin: 50px auto 0px;  color: white; background: #6596e6; text-align: center;  border: 1px solid #B0C4DE; border-bottom: none;
+border-radius: 10px 10px 0px 0px; padding: 20px; font-family: 'Open Sans', sans-serif;">
+        <h2>Dodavanje filmova</h2>
+    </div>
+    <form autocomplete="off" th:action="@{/dodavanjeFilmova}" th:object="${film}" method="post" align="center"
+          style="width: 30%; margin: 0px auto; padding: 20px; border: 1px solid #B0C4DE; background: white; border-radius: 0px 0px 10px 10px;">
+        <div class="input-group" style="margin: 10px 0px 10px 0px; font-family: 'Open Sans', sans-serif;" >
+            <label style="display: block; text-align: left; margin: 3px;">Naziv filma</label><br>
+            <input th:field="*{nazivFilma}" placeholder="Naziv filma" class="form-control" required
+                   oninvalid="this.setCustomValidity('Ovo polje je obavezno')"
+                   oninput="this.setCustomValidity('')" onautocomplete="this.setCustomValidity('')"
+                   onchange="this.setCustomValidity('')" style="height: 30px; width: 93%; padding: 5px 10px; font-size: 16px; border-radius: 5px; border: 1px solid gray; font-family: 'Open Sans', sans-serif;">
+        </div>
+        <div class="input-group" style="margin: 10px 0px 10px 0px; font-family: 'Open Sans', sans-serif;">
+            <label style="display: block; text-align: left; margin: 3px; font-family: 'Open Sans', sans-serif;">Žanr</label><br>
+            <input th:field="*{zanr}" placeholder="Žanr" class="form-control" required
+                   oninvalid="this.setCustomValidity('Ovo polje je obavezno')"
+                   oninput="this.setCustomValidity('')" onautocomplete="this.setCustomValidity('')"
+                   onchange="this.setCustomValidity('')" style="height: 30px; width: 93%; padding: 5px 10px; font-size: 16px; border-radius: 5px; border: 1px solid gray; font-family: 'Open Sans', sans-serif;">
+        </div>
+        <div class="input-group" style="margin: 10px 0px 10px 0px; font-family: 'Open Sans', sans-serif;">
+            <label style="display: block; text-align: left; margin: 3px; font-family: 'Open Sans', sans-serif;">Tehnologija</label><br>
+            <select th:field="*{tehnologija}" style="height: 30px; width: 105%; padding: 5px 10px; font-size: 16px; border-radius: 5px; border: 1px solid gray; font-family: 'Open Sans', sans-serif;">
+                <option th:value="'2D'" th:text="2D"></option>
+                <option th:value="'3D'" th:text="3D"></option>
+                <option th:value="'4K'" th:text="4K"></option>
+            </select>
+        </div>
+        <div class="input-group" style="margin: 10px 0px 10px 0px; font-family: 'Open Sans', sans-serif;">
+            <label style="display: block; text-align: left; margin: 3px; font-family: 'Open Sans', sans-serif;">Trajanje</label><br>
+            <input th:field="*{trajanje}" placeholder="Trajanje" class="form-control" required type="number"
+                   oninvalid="this.setCustomValidity('Ovo polje je obavezno')"
+                   oninput="this.setCustomValidity('')" onautocomplete="this.setCustomValidity('')"
+                   onchange="this.setCustomValidity('')" style="height: 30px; width: 93%; padding: 5px 10px; font-size: 16px; border-radius: 5px; border: 1px solid gray; font-family: 'Open Sans', sans-serif;">
+        </div>
+        <div class="input-group" style="margin: 10px 0px 10px 0px; font-family: 'Open Sans', sans-serif;">
+            <label style="display: block; text-align: left; margin: 3px; font-family: 'Open Sans', sans-serif;">Opis</label><br>
+            <input th:field="*{opis}" placeholder="https://www.imdb.com/title/" class="form-control" required type="url"
+                   oninvalid="this.setCustomValidity('Ovo polje je obavezno')"
+                   oninput="this.setCustomValidity('')" onautocomplete="this.setCustomValidity('')"
+                   onchange="this.setCustomValidity('')" style="height: 30px; width: 93%; padding: 5px 10px; font-size: 16px; border-radius: 5px; border: 1px solid gray; font-family: 'Open Sans', sans-serif;">
+        </div>
+        <div class="input-group" style="margin: 10px 0px 10px 0px; font-family: 'Open Sans', sans-serif;">
+            <label style="display: block; text-align: left; margin: 3px; font-family: 'Open Sans', sans-serif;">Trailer</label><br>
+            <input th:field="*{trailer}" placeholder="https://www.youtube.com/embed/" class="form-control" required type="url"
+                   oninvalid="this.setCustomValidity('Ovo polje je obavezno')"
+                   oninput="this.setCustomValidity('')" onautocomplete="this.setCustomValidity('')"
+                   onchange="this.setCustomValidity('')" style="height: 30px; width: 93%; padding: 5px 10px; font-size: 16px; border-radius: 5px; border: 1px solid gray; font-family: 'Open Sans', sans-serif;">
+        </div>
+        <div>
+            <div class="input-group" style="margin: 10px 0px 10px 0px; font-family: 'Open Sans', sans-serif;">
+                <input type="submit" class="btn" value="Dodajte novi film" style="padding: 10px; font-size: 15px; color: white; background: #4c60af; border: none; border-radius: 5px; margin-left: 110px; font-family: 'Verdana', sans-serif;">
+            </div>
+            <span th:utext="${poruka}">
+            <div class="alert alert-success alert-dismissible col-sm-12"
+                 th:if="${(bindingResult!=null && bindingResult.getAllErrors() != null)}">
+                <ul th:each="data : ${bindingResult.getAllErrors()}">
+                    <li th:text="${data.getObjectName() + ' :: ' + data.getDefaultMessage()}">
+                    </li>
+                </ul>
+            </div>
+            </span>
+        </div>
+    </form>
+    </body>
+</div>
+
+</html>

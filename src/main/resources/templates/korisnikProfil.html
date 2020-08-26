@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:insert="navigacija.html :: headerfiles">
+    <meta charset="UTF-8">
+    <title>Profil</title>
+</head>
+<body>
+    <header th:insert="navigacija.html :: nav"></header>
+    <div align="center" class="container">
+        <h2>Vas profil</h2>
+        <hr>
+        <h4>Detalji profila</h4>
+
+        <span th:text="${poruka}"></span>
+
+        <br><br>
+        <div align = "center">
+            <table class="table">
+                <thead class="thead-light" style="border-color: lightseagreen">
+                    <th>Ime</th>
+                    <td th:text="${korisnik.getIme()}"></td>
+                </thead>
+                <thead class="thead-light" style="border-color: lightseagreen">
+                    <th>Prezime</th>
+                    <td th:text="${korisnik.getPrezime()}"></td>
+                </thead>
+                <thead class="thead-light" style="border-color: lightseagreen">
+                    <th>E-mail</th>
+                    <td th:text="${korisnik.getEmail()}"></td>
+                </thead>
+                <thead class="thead-light" style="border-color: lightseagreen">
+                <th>Poeni</th>
+                <td th:text="${korisnik.getPoeni()}"></td>
+                </thead>
+            </table>
+            <a href="#" th:href="@{/korisnikProfil/update}" class="btn btn-warning">Izmeni podatke</a>
+        </div>
+
+
+        <hr>
+
+
+
+
+    </div>
+</body>
+</html>

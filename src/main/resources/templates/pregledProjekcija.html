@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head th:insert="navigacija.html :: headerfiles">
+    <meta charset="UTF-8">
+    <title>Pregled projekcija</title>
+</head>
+    <body>
+    <header th:insert="navigacija.html :: nav"></header>
+    <div>
+        <form th:action="@{/izborSedista}"  th:object="${projekcija}" method="post" th:align="center">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Naslov filma</th>
+                    <th>Datum projekcije</th>
+                    <th>Broj sale</th>
+                    <th>Rezervišite kartu</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="projekcija : ${projekcija}">
+                    <td th:text="${projekcija.getFilm().getNazivFilma()}"></td>
+                    <td th:text="${projekcija.getPocetakProjekcije()}"></td>
+                    <td th:text="${projekcija.getSala().getBrojSale()}"></td>
+                    <td>
+                        <form th:action="@{/izborSedista}" method="post">
+                            <input type="hidden" th:value="${projekcija.getProjekcijaId()}" name="projekcijaId">
+                            <input type="submit" value="Izbor sedista" class="btn btn-primary">
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+    </body>
+</html>

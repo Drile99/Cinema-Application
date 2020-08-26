@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head th:insert="navigacija.html :: headerfiles">
+    <meta charset="UTF-8">
+    <title>Rezervacije korisnika</title>
+</head>
+<body>
+<header th:insert="navigacija.html :: nav"></header><pre style="margin-bottom: 3px"></pre>
+<div align="center" class="text-white bg-primary">
+    <form th:action="@{/izvestajRezervacija}" method="post" th:align="center">
+        <h2 style="text-align: center" class="text-white bg-dark">Potvrđene rezervacije</h2>
+        <table class="table table-bordered table-dark" style="table-layout:auto;">
+            <thead  style="text-align: center">
+            <tr  style="text-align: center">
+                <th  style="text-align: center">Grad</th>
+                <th  style="text-align: center">Naziv filma</th>
+                <th  style="text-align: center">Žanr</th>
+                <th  style="text-align: center">Tehnologija</th>
+                <th  style="text-align: center">Trajanje</th>
+                <th  style="text-align: center">Datum projekcije</th>
+                <th  style="text-align: center">Početak projekcije</th>
+                <th  style="text-align: center">Kraj projekcije</th>
+                <th  style="text-align: center">Broj sale</th>
+                <th  style="text-align: center">Sedište</th>
+            </tr>
+            </thead>
+            <tbody>
+<!--            prikaz svih rezervacija-->
+            <tr  style="text-align: center" th:each="rezervisanoSediste : ${rezervisanaSedistaSet}">
+                <div th:if="${rezervisanoSediste.getRezervacija().getPotvrdjena()==true}">
+                    <td  style="text-align: center" th:text="${rezervisanoSediste.getRezervacija().getProjekcija().getSala().getBioskop().getGrad()}"></td>
+                    <td  style="text-align: center" th:text="${rezervisanoSediste.getRezervacija().getProjekcija().getFilm().getNazivFilma()}"></td>
+                    <td  style="text-align: center" th:text="${rezervisanoSediste.getRezervacija().getProjekcija().getFilm().getZanr()}"></td>
+                    <td  style="text-align: center" th:text="${rezervisanoSediste.getRezervacija().getProjekcija().getFilm().getTehnologija()}"></td>
+                    <td  style="text-align: center" th:text="${rezervisanoSediste.getRezervacija().getProjekcija().getFilm().getTrajanje()} + ' minuta'"></td>
+                    <td  style="text-align: center" th:text="${#temporals.format(rezervisanoSediste.getRezervacija().getProjekcija().getPocetakProjekcije(), 'dd-MM-yyyy')}"></td>
+                    <td  style="text-align: center" th:text="${#temporals.format(rezervisanoSediste.getRezervacija().getProjekcija().getPocetakProjekcije().toLocalTime(), 'HH:mm') + 'h'}"></td>
+                    <td  style="text-align: center" th:text="${#temporals.format(rezervisanoSediste.getRezervacija().getProjekcija().getKrajProjekcije().toLocalTime(), 'HH:mm') + 'h'}"></td>
+                    <td  style="text-align: center" th:text="${rezervisanoSediste.getRezervacija().getProjekcija().getSala().getBrojSale()}"></td>
+                    <td  style="text-align: center" th:text="${rezervisanoSediste.getSediste().getSedisteId()}"></td>
+                </div>
+            </tr>
+            </tbody>
+        </table>
+        <h2 style="text-align: center" class="text-white bg-dark">Statistika</h2>
+        <table class="table table-bordered table-dark" style="table-layout:auto;">
+         <thead  style="text-align: center">
+         <tr  style="text-align: center">
+             <th  style="text-align: center">Broj potvrđenih rezervacija</th>
+             <th  style="text-align: center">Broj otkazanih rezervacija</th>
+             <th  style="text-align: center">Broj rezervacija bez statusa</th>
+             <th  style="text-align: center">Ukupno rezervacija</th>
+         </tr>
+         </thead>
+         <tbody>
+         <td  style="text-align: center" th:text="${potvrdjene}"></td>
+         <td  style="text-align: center" th:text="${otkazane}"></td>
+         <td  style="text-align: center" th:text="${bezStatusa}"></td>
+         <td  style="text-align: center" th:text="${ukupno}"></td>
+         </tbody>
+        </table>
+<!--        kreiranje nove tabele za prikaz zarade na dan i kasnije ukupne zarade-->
+        <h2 style="text-align: center" class="text-white bg-dark">Pregled zarade na dan</h2><h2 th:text="${#temporals.format(datum, 'dd-MM-yyyy')}"></h2>
+        <table class="table table-bordered" style="table-layout:auto;">
+            <thead  style="text-align: center">
+            <tr  style="text-align: center">
+                <th  style="text-align: center; color: white">Ukupna zarada</th>
+            </tr>
+            </thead>
+            <tbody>
+            <div th:if="${zarada==0}">
+                <td  style="text-align: center; color: white">Nema zarade!</td>
+            </div>
+            <div th:unless="${zarada==0}">
+                <td  style="text-align: center; color: white" th:text="${zarada}"></td>
+            </div>
+            </tbody>
+        </table>
+    </form>
+</div>
+</body>
+
+</html>

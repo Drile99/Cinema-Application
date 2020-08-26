@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head th:insert="navigacija.html :: headerfiles">
+    <meta charset="UTF-8">
+    <title>Korisnički profil</title>
+</head>
+<div style="margin: 0px; padding: 0px;">
+    <body style="font-size: 120%; background-color: #E5F0FF; font-family: 'Open Sans', sans-serif;" >
+    <header th:insert="navigacija.html :: nav"></header>
+    <div class="header" style="width: 30%; margin: 50px auto 0px;  color: white; background: #6596e6; text-align: center;  border: 1px solid #B0C4DE; border-bottom: none;
+border-radius: 10px 10px 0px 0px; padding: 20px; font-family: 'Open Sans', sans-serif;">
+        <h2>Izmena podataka</h2>
+    </div>
+    <form autocomplete="off" th:action="@{/korisnikProfil/update}" th:object="${korisnik}" method="post" align="center"
+          style="width: 30%; margin: 0px auto; padding: 20px; border: 1px solid #B0C4DE; background: white; border-radius: 0px 0px 10px 10px;">
+        <div class="input-group" style="margin: 10px 0px 10px 0px; font-family: 'Open Sans', sans-serif;" >
+            <label style="display: block; text-align: left; margin: 3px;">Ime</label><br>
+            <input th:field="*{ime}" th:placeholder="${korisnik.getIme()}" class="form-control" required
+                   oninvalid="this.setCustomValidity('Ovo polje je obavezno')"
+                   oninput="this.setCustomValidity('')" onautocomplete="this.setCustomValidity('')"
+                   onchange="this.setCustomValidity('')" style="height: 30px; width: 93%; padding: 5px 10px; font-size: 16px; border-radius: 5px; border: 1px solid gray; font-family: 'Open Sans', sans-serif;">
+        </div>
+        <div class="input-group" style="margin: 10px 0px 10px 0px; font-family: 'Open Sans', sans-serif;">
+            <label style="display: block; text-align: left; margin: 3px; font-family: 'Open Sans', sans-serif;">Prezime</label><br>
+            <input th:field="*{prezime}" th:placeholder="${korisnik.getPrezime()}" class="form-control" required
+                   oninvalid="this.setCustomValidity('Ovo polje je obavezno')"
+                   oninput="this.setCustomValidity('')" onautocomplete="this.setCustomValidity('')"
+                   onchange="this.setCustomValidity('')" style="height: 30px; width: 93%; padding: 5px 10px; font-size: 16px; border-radius: 5px; border: 1px solid gray; font-family: 'Open Sans', sans-serif;">
+        </div>
+        <div class="input-group" style="margin: 10px 0px 10px 0px; font-family: 'Open Sans', sans-serif;">
+            <label style="display: block; text-align: left; margin: 3px; font-family: 'Open Sans', sans-serif;">Član kluba</label><br>
+            <select th:field="*{clanKluba}" class="form-control" required style="height: 30px; width: 93%; padding: 5px 10px; font-size: 16px; border-radius: 5px; border: 1px solid gray; font-family: 'Open Sans', sans-serif;">
+                <option th:value="0" th:text="'Ne'"></option>
+                <option th:value="1" th:text="'Da'"></option>
+            </select>
+        </div>
+                                <input type="hidden" th:field="*{korisnikId}">
+                                <input type="hidden" th:field="*{sifra}">
+                                <input type="hidden" th:field="*{poeni}">
+                                <input type="hidden" th:field="*{email}">
+                                <input type="hidden" th:field="*{tipKorisnika}">
+        <div>
+            <div class="input-group" style="margin: 10px 0px 10px 0px; font-family: 'Open Sans', sans-serif;">
+                <input type="submit" class="btn" value="Potvrdite izmenu" style="padding: 10px; font-size: 15px; color: white; background: #4c60af; border: none; border-radius: 5px; margin-left: 130px; font-family: 'Verdana', sans-serif;">
+            </div>
+        </div>
+    </form>
+    </body>
+</div>
+</html>

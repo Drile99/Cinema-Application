@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head th:insert="navigacija.html :: headerfiles">
+    <meta charset="UTF-8">
+    <title>Registracija</title>
+<!--    javascrript ajax-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<div style="margin: 0px; padding: 0px;">
+<body style="font-size: 120%; background-color: #E5F0FF; font-family: 'Open Sans', sans-serif;" >
+<header th:insert="navigacija.html :: nav"></header>
+<div class="header" style="width: 30%; margin: 50px auto 0px;  color: white; background: #4c60af; text-align: center;  border: 1px solid #B0C4DE; border-bottom: none;
+border-radius: 10px 10px 0px 0px; padding: 20px; font-family: 'Open Sans', sans-serif;">
+    <h2>Registrujte se</h2>
+</div>
+<!--pocetak forme-->
+        <form autocomplete="off" th:action="@{/registracija}" th:object="${korisnik}" method="post" align="center"
+        style="width: 30%; margin: 0px auto; padding: 20px; border: 1px solid #B0C4DE; background: white; border-radius: 0px 0px 10px 10px;">
+            <div class="input-group" style="margin: 10px 0px 10px 0px; font-family: 'Open Sans', sans-serif;" >
+                <label style="display: block; text-align: left; margin: 3px;">Ime</label><br>
+<!--                polje za ime u thymeleaf-->
+                <input th:field="*{ime}" placeholder="Unesite vaše ime" class="form-control" required
+                       oninvalid="this.setCustomValidity('Ovo polje je obavezno')"
+                       oninput="this.setCustomValidity('')" onautocomplete="this.setCustomValidity('')"
+                       onchange="this.setCustomValidity('')" style="height: 30px; width: 93%; padding: 5px 10px; font-size: 16px; border-radius: 5px; border: 1px solid gray; font-family: 'Open Sans', sans-serif;">
+            </div>
+            <div class="input-group" style="margin: 10px 0px 10px 0px; font-family: 'Open Sans', sans-serif;">
+                <label style="display: block; text-align: left; margin: 3px; font-family: 'Open Sans', sans-serif;">Prezime</label><br>
+                <!--                polje za prezime u thymeleaf-->
+                <input th:field="*{prezime}" placeholder="Unesite vaše prezime" class="form-control" required
+                       oninvalid="this.setCustomValidity('Ovo polje je obavezno')"
+                       oninput="this.setCustomValidity('')" onautocomplete="this.setCustomValidity('')"
+                       onchange="this.setCustomValidity('')" style="height: 30px; width: 93%; padding: 5px 10px; font-size: 16px; border-radius: 5px; border: 1px solid gray; font-family: 'Open Sans', sans-serif;">
+            </div>
+            <div class="input-group" style="margin: 10px 0px 10px 0px; font-family: 'Open Sans', sans-serif;">
+                <label style="display: block; text-align: left; margin: 3px; font-family: 'Open Sans', sans-serif;">E-mail</label><br>
+                <!--                polje za email u thymeleaf-->
+                <input type="text" th:field="*{email}" placeholder="Unesite vaš e-mail" class="form-control" required
+                       oninvalid="this.setCustomValidity('Ovo polje je obavezno')"
+                       oninput="this.setCustomValidity('')" onautocomplete="this.setCustomValidity('')"
+                       onchange="this.setCustomValidity('')" style="height: 30px; width: 93%; padding: 5px 10px; font-size: 16px; border-radius: 5px; border: 1px solid gray; font-family: 'Open Sans', sans-serif;">
+            </div>
+            <div class="input-group" style="margin: 10px 0px 10px 0px; font-family: 'Open Sans', sans-serif;">
+                <label style="display: block; text-align: left; margin: 3px; font-family: 'Open Sans', sans-serif;">Šifra</label><br>
+                <!--                polje za sifru u thymeleaf koja ce biti bycript u bazi-->
+                <input type="password" th:field="*{sifra}" placeholder="Unesite šifru" class="form-control" required
+                       oninvalid="this.setCustomValidity('Ovo polje je obavezno')"
+                       oninput="this.setCustomValidity('')" onautocomplete="this.setCustomValidity('')"
+                       onchange="this.setCustomValidity('')" style="height: 30px; width: 93%; padding: 5px 10px; font-size: 16px; border-radius: 5px; border: 1px solid gray; font-family: 'Open Sans', sans-serif;">
+            </div>
+            <!--                hidden polja koja korisnik ne moze da ubaci pri registraciji-->
+            <input type="hidden" th:field="*{tipKorisnika}" th:value="${korisnik.setTipKorisnika('KORISNIK')}">
+            <input type="hidden" th:field="*{poeni}" th:value="${korisnik.setPoeni(0)}">
+            <input type="hidden" th:field="*{clanKluba}" th:value="${korisnik.setClanKluba(false)}">
+            <div>
+                <div class="input-group" style="margin: 10px 0px 10px 0px; font-family: 'Open Sans', sans-serif;">
+                    <input type="submit" class="btn" value="Registrujte se" style="  padding: 10px; font-size: 14px; color: white; background: #4c60af; border: none; border-radius: 5px; margin-left: 130px; font-family: 'Verdana', sans-serif;">
+                </div>
+                <span th:text="${poruka}"></span>
+                <div class="alert alert-success alert-dismissible col-sm-12"
+                     th:if="${(bindingResult!=null && bindingResult.getAllErrors() != null)}">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+                    <ul th:each="data : ${bindingResult.getAllErrors()}">
+                        <li th:text="${data.getObjectName() + ' :: ' + data.getDefaultMessage()}">
+                        </li>
+                    </ul>
+                </div>
+            </div>
+<!--            kraj forme-->
+        </form>
+</body>
+</div>
+</html>

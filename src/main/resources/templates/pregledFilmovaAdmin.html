@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head th:insert="navigacija.html :: headerfiles">
+    <meta charset="UTF-8">
+    <title>Pregled filmova</title>
+</head>
+<body style="background-color: #E5F0FF;">
+<header th:insert="navigacija.html :: nav"></header>
+<div>
+    <form th:action="@{/pregledFilmova}" th:object="${film}" method="post" th:align="center">
+        <table class="table table-bordered;" style="border: 1px solid white!important;">
+            <thead style="border: 1px solid white!important;">
+            <tr style="border: 1px solid white!important;">
+                <th style="border: 1px solid white!important;">Naslov</th>
+                <th style="border: 1px solid white!important;">Žanr</th>
+                <th style="border: 1px solid white!important;">Tehnologija</th>
+                <th style="border: 1px solid white!important;">Trajanje</th>
+                <th style="border: 1px solid white!important;">Detalji</th>
+                <th style="border: 1px solid white!important;">Trailer</th>
+                <th style="border: 1px solid white!important;">Projekcije filma</th>
+<!--                <th style="border: 1px solid white!important;">Novi film</th>-->
+                <th style="border: 1px solid white!important;">Izmena filma</th>
+                <th style="border: 1px solid white!important;">Brisanje filma</th>
+            </tr>
+            </thead>
+            <tbody style="border: 1px solid white!important;">
+            <tr th:each="film : ${film}" style="border: 1px solid white!important;">
+                <td th:text="${film.nazivFilma}" style="border: 1px solid white!important; text-align: center; vertical-align: middle;"></td>
+                <td th:text="${film.zanr}" style="border: 1px solid white!important; text-align: center; vertical-align: middle;"></td>
+                <td th:text="${film.tehnologija}" style="border: 1px solid white!important; text-align: center; vertical-align: middle;"></td>
+                <td th:text="${film.trajanje} + ' minuta'" style="border: 1px solid white!important; text-align: center; vertical-align: middle;"></td>
+                <td style="border: 1px solid white!important; text-align: center; vertical-align: middle;">
+                    <a th:href="@{${film.opis}}" target="_blank">Detalji</a>
+                </td>
+                <td style="border: 1px solid white!important;">
+                    <iframe th:src="@{${film.trailer}}" allowfullscreen="true"></iframe>
+                </td>
+                <td style="border: 1px solid white!important; text-align: center; vertical-align: middle;">
+                    <a style="position: center" class="btn btn-info" th:href="@{/pregledProjekcijaAdmin/{film}(film=${film.getNazivFilma()})}">Projekcije</a>
+                </td>
+
+                <td style="border: 1px solid white!important; text-align: center; vertical-align: middle;">
+                    <a style="position: center" class="btn btn-primary" th:href="@{/izmenaFilmova/{id}(id=${film.getFilmId()})}">Izmeni</a>
+                </td>
+                <td style="border: 1px solid white!important; text-align: center; vertical-align: middle;">
+                    <a style="position: center" class="btn btn-danger" th:href="@{/brisanjeFilmova/{id}(id=${film.getFilmId()})}">Obriši</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+    <br><br>
+    <a style="position: relative; margin-bottom: 50px; margin-left: 1150px; width: 12%; right: 10px;" class="btn btn-success" th:href="@{/dodavanjeFilmova}">Dodaj novi film</a>
+</div>
+</body>
+
+</html>

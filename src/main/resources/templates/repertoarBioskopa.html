@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head th:insert="navigacija.html :: headerfiles">
+    <meta charset="UTF-8">
+    <title>Pregled filmova</title>
+</head>
+<body>
+<header th:insert="navigacija.html :: nav"></header>
+<div>
+    <form th:action="@{/repertoarBioskopa}" th:object="${film}" method="post" th:align="center">
+        <table class="table table-bordered;">
+            <thead>
+            <tr>
+                <th>Naslov</th>
+                <th>Žanr</th>
+                <th>Tehnologija</th>
+                <th>Trajanje</th>
+                <th>Detalji</th>
+                <th>Trailer</th>
+                <th>Projekcije filma</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="film : ${film}"    >
+                <td th:text="${film.nazivFilma}"></td>
+                <td th:text="${film.zanr}"></td>
+                <td th:text="${film.tehnologija}"></td>
+                <td th:text="${film.trajanje} + ' minuta'"></td>
+                <td>
+                <a th:href="@{${film.opis}}" target="_blank">Detalji</a>
+                </td>
+                <td>
+                    <iframe th:src="@{${film.trailer}}" allowfullscreen="true"></iframe>
+                </td>
+                <td>
+                    <a th:href="@{/pregledProjekcija/{film}(film=${film.getNazivFilma()})}">Projekcije filma</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
+</body>
+</html>

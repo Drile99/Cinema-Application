@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+<head th:insert="navigacija.html :: headerfiles">
+    <meta charset="UTF-8">
+    <title>Izmena projekcije</title>
+</head>
+<div style="margin: 0px; padding: 0px;">
+    <body style="font-size: 120%; background-color: #E5F0FF; font-family: 'Open Sans', sans-serif;" >
+    <header th:insert="navigacija.html :: nav"></header>
+    <div class="header" style="width: 30%; margin: 50px auto 0px;  color: white; background: #6596e6; text-align: center;  border: 1px solid #B0C4DE; border-bottom: none;
+border-radius: 10px 10px 0px 0px; padding: 20px; font-family: 'Open Sans', sans-serif;">
+        <h2>Izmena projekcije</h2>
+    </div>
+    <form action="#" th:action="@{/izmenaProjekcija/{projekcijaId}(projekcijaId=${projekcija.getProjekcijaId()})}" th:object="${projekcija}" method="post" align="center"
+          style="width: 30%; margin: 0px auto; padding: 20px; border: 1px solid #B0C4DE; background: white; border-radius: 0px 0px 10px 10px;">
+        <div class="input-group" style="margin: 10px 0px 10px 0px; font-family: 'Open Sans', sans-serif;" >
+            <label style="display: block; text-align: left; margin: 3px;">Naziv filma</label><br>
+            <input class="form-control" th:value="${projekcija.getFilm().getNazivFilma()}" name="filmNaziv" readonly style="height: 30px; width: 93%; padding: 5px 10px; font-size: 16px; border-radius: 5px; border: 1px solid gray; font-family: 'Open Sans', sans-serif;">
+        </div>
+        <div class="input-group" style="margin: 10px 0px 10px 0px; font-family: 'Open Sans', sans-serif;">
+            <label style="display: block; text-align: left; margin: 3px; font-family: 'Open Sans', sans-serif;">Pocetak projekcije</label><br>
+            <input class="form-control" type="datetime-local" name="pocetakProjekcije" th:placeholder="${projekcija.getPocetakProjekcije()}" required style="height: 30px; width: 93%; padding: 5px 10px; font-size: 16px; border-radius: 5px; border: 1px solid gray; font-family: 'Open Sans', sans-serif;">
+        </div>
+
+        <div class="input-group" style="margin: 10px 0px 10px 0px; font-family: 'Open Sans', sans-serif;" >
+            <label style="display: block; text-align: left; margin: 3px;">Broj sale</label><br>
+            <select name="sala" style="height: 30px; width: 100%; padding: 5px 10px; font-size: 16px; border-radius: 5px; border: 1px solid gray; font-family: 'Open Sans', sans-serif;">
+                <div th:each="sala:${sala}">
+                    <option th:text="${sala.getBrojSale()}" th:value="${sala.getSalaId()}" th:placeholder="${projekcija.getSala().getSalaId()}"></option>
+                </div>
+            </select>
+        </div>
+        <div class="input-group" style="margin: 10px 0px 10px 0px; font-family: 'Open Sans', sans-serif;">
+            <input type="hidden" name="filmId" th:value="${projekcija.getFilm().getFilmId()}">
+            <input type="hidden" th:value="${projekcija.getProjekcijaId()}" th:field="*{projekcijaId}">
+            <input type="submit" class="btn" value="Izmenite projekciju" style="padding: 10px; font-size: 15px; color: white; background: #4c60af; border: none; border-radius: 5px; margin-left: 110px; font-family: 'Verdana', sans-serif;">
+        </div>
+        <span th:utext="${msg}"></span>
+    </form>
+    </body>
+</div>
+
+</html>

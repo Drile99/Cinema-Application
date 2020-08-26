@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:insert="navigacija.html :: headerfiles">
+    <meta charset="UTF-8">
+    <title>Pocetna</title>
+</head>
+<body style="background-color: #343a40;">
+<header th:insert="navigacija.html :: nav"></header>
+ <!-- carousel -->
+<div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+        <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+    </ol>
+   <div class="carousel-inner">
+        <div class="carousel-item active" style="height: 600px">
+            <img src="../static/images/slika1.jpg" class="d-block w-100" alt="..." th:src="@{images/slika1.jpg}">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Filmski dan za korisnicke CineDri bonus kartice</h5>
+                <p>Cetvrtak dan sa pogodnostima za članove CineDri bonus kluba</p>
+            </div>
+        </div>
+        <div class="carousel-item" style="height: 600px">
+            <img src="../static/images/slika2.jpg" class="d-block w-100" alt="..." th:src="@{images/slika2.jpg}">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Doživi film kao nikada do sad</h5>
+                <p>MX4D tehnologija stiže i bioskope CineDri 4D DeltaCity u Beogradu i CineDri Kragujevac Playa</p>
+            </div>
+        </div>
+        <div class="carousel-item" style="height: 600px">
+            <img src="../static/images/slika3.jpg" class="d-block w-100" alt="..." th:src="@{images/slika3.jpg}">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Proslavi rođendan kao na filmu</h5>
+                <p>Proslavi rođendan sa prijateljima u društvu tvojih omiljenih filmskih junaka</p>
+            </div>
+        </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+<!-- kraj carousel -->
+<div style="background-color: #343a40; text-align: center;" >
+    <h4 style="background-color: #343a40; color: white; text-align: center">CineDri je inovativna aplikacija koja pomaže ljudima da pronađu najnovije filmove i pogledaju u svom omiljenom bioskopu.</h4>
+    <h4 style="background-color: #343a40; color: white; text-align: center">Potrebno je samo da se registrujete i izaberete filmove koje želite da gledate kao i tehnologuju prikaza.</h4>
+
+</div>
+</body>
+</html>

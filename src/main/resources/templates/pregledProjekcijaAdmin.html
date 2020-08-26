@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head th:insert="navigacija.html :: headerfiles">
+    <meta charset="UTF-8">
+    <title>Pregled projekcija</title>
+</head>
+<body style="background-color: #E5F0FF;">
+<header th:insert="navigacija.html :: nav"></header>
+<div>
+    <form th:action="@{/pregledProjekcijaAdmin/{film}}" th:object="${projekcija}" method="post" th:align="center">
+        <table class="table table-bordered" style="border: 1px solid white!important;">
+            <thead  style="border: 1px solid white!important; text-align: center; vertical-align: middle;">
+            <tr style="border: 1px solid white!important;">
+                <th  style="border: 1px solid white!important; text-align: center; vertical-align: middle;">Naslov filma</th>
+                <th  style="border: 1px solid white!important; text-align: center; vertical-align: middle;">Grad</th>
+                <th  style="border: 1px solid white!important; text-align: center; vertical-align: middle;">Datum projekcije</th>
+                <th  style="border: 1px solid white!important; text-align: center; vertical-align: middle;">Početak projekcije</th>
+                <th  style="border: 1px solid white!important; text-align: center; vertical-align: middle;">Kraj projekcije</th>
+                <th  style="border: 1px solid white!important; text-align: center; vertical-align: middle;">Broj sale</th>
+                <th  style="border: 1px solid white!important; text-align: center; vertical-align: middle;">Izmena projekcija</th>
+                <th  style="border: 1px solid white!important; text-align: center; vertical-align: middle;">Otkazivanje projekcija</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="projekcija : ${projekcija}">
+                <td  style="border: 1px solid white!important; text-align: center; vertical-align: middle;" th:text="${projekcija.getFilm().getNazivFilma()}"></td>
+                <td  style="border: 1px solid white!important; text-align: center; vertical-align: middle;" th:text="${projekcija.getSala().getBioskop().getGrad()}"></td>
+                <td  style="border: 1px solid white!important; text-align: center; vertical-align: middle;" th:text="${#temporals.format(projekcija.getPocetakProjekcije().toLocalDate(), 'dd-MM-yyyy')}"></td>
+                <td  style="border: 1px solid white!important; text-align: center; vertical-align: middle;" th:text="${#temporals.format(projekcija.getPocetakProjekcije().toLocalTime(), 'HH:mm') + 'h'}"></td>
+                <td  style="border: 1px solid white!important; text-align: center; vertical-align: middle;" th:text="${#temporals.format(projekcija.getKrajProjekcije().toLocalTime(), 'HH:mm') + 'h'}"></td>
+                <td  style="border: 1px solid white!important; text-align: center; vertical-align: middle;" th:text="${projekcija.getSala().getBrojSale()}"></td>
+                <td  style="border: 1px solid white!important; text-align: center; vertical-align: middle;">
+                    <a style="position: center" class="btn btn-primary" th:href="@{/izmenaProjekcija/{projekcijaId}(projekcijaId=${projekcija.getProjekcijaId()})}">Izmeni</a>
+                </td>
+                <td  style="border: 1px solid white!important; text-align: center; vertical-align: middle;">
+                    <a style="position: center; color: white" class="btn btn-danger" th:href="@{/otkazivanjeProjekcija/{id}(id=${projekcija.getProjekcijaId()})}">Otkaži</a>
+                </td>
+                <input type="hidden" name="film" th:value="${projekcija.getFilm().getFilmId()}">
+            </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
+</body>
+
+</html>

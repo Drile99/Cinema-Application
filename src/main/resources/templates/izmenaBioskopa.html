@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head th:insert="navigacija.html :: headerfiles">
+    <meta charset="UTF-8">
+    <title>Novi bioskop</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<div style="margin: 0px; padding: 0px;">
+    <body style="font-size: 120%; background-color: #E5F0FF; font-family: 'Open Sans', sans-serif;" >
+    <header th:insert="navigacija.html :: nav"></header>
+    <div class="header" style="width: 30%; margin: 50px auto 0px;  color: white; background: #6596e6; text-align: center;  border: 1px solid #B0C4DE; border-bottom: none;
+border-radius: 10px 10px 0px 0px; padding: 20px; font-family: 'Verdana', sans-serif;">
+        <h2>Izmena bioskopa</h2>
+    </div>
+    <form autocomplete="off" th:action="@{/izmenaBioskopa/{bioskop}(bioskop=${bioskop.getBioskopId()})}" th:object="${bioskop}" method="post" align="center"
+          style="width: 30%; margin: 0px auto; padding: 20px; border: 1px solid #B0C4DE; background: white; border-radius: 0px 0px 10px 10px;">
+        <div class="input-group" style="margin: 10px 0px 10px 0px; font-family: 'Open Sans', sans-serif;" >
+            <label style="display: block; text-align: left; margin: 3px;">Naziv bioskopa</label><br>
+            <input th:field="*{naziv}" th:placeholder="${bioskop.naziv}" class="form-control" required
+                   oninvalid="this.setCustomValidity('Ovo polje je obavezno')"
+                   oninput="this.setCustomValidity('')" onautocomplete="this.setCustomValidity('')"
+                   onchange="this.setCustomValidity('')" style="height: 30px; width: 93%; padding: 5px 10px; font-size: 16px; border-radius: 5px; border: 1px solid gray; font-family: 'Open Sans', sans-serif;">
+        </div>
+        <div class="input-group" style="margin: 10px 0px 10px 0px; font-family: 'Open Sans', sans-serif;">
+            <label style="display: block; text-align: left; margin: 3px; font-family: 'Open Sans', sans-serif;">Adresa</label><br>
+            <input th:field="*{adresa}" th:placeholder="${bioskop.adresa}" class="form-control" required
+                   oninvalid="this.setCustomValidity('Ovo polje je obavezno')"
+                   oninput="this.setCustomValidity('')" onautocomplete="this.setCustomValidity('')"
+                   onchange="this.setCustomValidity('')" style="height: 30px; width: 93%; padding: 5px 10px; font-size: 16px; border-radius: 5px; border: 1px solid gray; font-family: 'Open Sans', sans-serif;">
+        </div>
+        <div class="input-group" style="margin: 10px 0px 10px 0px; font-family: 'Open Sans', sans-serif;">
+            <label style="display: block; text-align: left; margin: 3px; font-family: 'Open Sans', sans-serif;">Grad</label><br>
+            <input type="text" th:field="*{grad}" th:placeholder="${bioskop.grad}" class="form-control" required
+                   oninvalid="this.setCustomValidity('Ovo polje je obavezno')"
+                   oninput="this.setCustomValidity('')" onautocomplete="this.setCustomValidity('')"
+                   onchange="this.setCustomValidity('')" style="height: 30px; width: 93%; padding: 5px 10px; font-size: 16px; border-radius: 5px; border: 1px solid gray; font-family: 'Open Sans', sans-serif;">
+        </div>
+        <span th:text="${greska}"></span>
+        <div>
+            <div class="input-group" style="margin: 10px 0px 10px 0px; font-family: 'Open Sans', sans-serif;">
+                <input type="submit" class="btn" value="Izmenite bioskop" style="padding: 10px; font-size: 15px; color: white; background: #4c60af; border: none; border-radius: 5px; margin-left: 110px; font-family: 'Open Sans', sans-serif;">
+            </div>
+        </div>
+    </form>
+    </body>
+</div>
+
+</html>
